@@ -24,7 +24,7 @@ const inputHandler = e => {
         .then(data => {
             console.log(data);
             if (data.length > 10) {
-                console.log("Too many matches found. Please enter a more specific name.")
+                Notify.info("Too many matches found. Please enter a more specific name.")
                 return;
             }
             renderMarkup(data);
@@ -32,7 +32,7 @@ const inputHandler = e => {
         .catch(err => {
             cleanMarkup(listEl);
             cleanMarkup(infoEl);
-            console.log("Oops, there is no country with that name");
+            Notify.failure("Oops, there is no country with that name");
         });
 };
 
@@ -61,7 +61,6 @@ const createInfoMarkup = data => {
   return data.map(
     ({ name, capital, population, flags, languages }) =>
       `<h1><img src="${flags.png}" alt="${name.official}" width="60" height="40">${name.official}</h1>
-      <p>Native Name: ${name.nativeName}</p>
       <p>Capital: ${capital}</p>
       <p>Population: ${population}</p>
       <p>Languages: ${Object.values(languages)}</p>`,
